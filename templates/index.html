@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="form-outline">
+  <form action="{{ url_for('api_search') }}" method="post">
+    <input type="text" id="form1" class="form-control" name="proc">
+    <br> 
+    <input type="submit" value="Search product" class="btn btn-success">
+  </form>
+</div>
+{% endblock %}
