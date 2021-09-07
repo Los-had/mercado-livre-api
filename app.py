@@ -9,10 +9,10 @@ app.config['SECRET_KEY'] = key
 
 @app.route('/', methods=['GET'])
 def index():
-    #try:
-    return render_template('index.html')
-    #except:
-        #return redirect('/error')
+    try:
+        return render_template('index.html')
+    except:
+        return redirect('/error')
 
 @app.route('/error', methods=['GET'])
 def error():
@@ -32,11 +32,14 @@ def api_find_product(product2):
 
 @app.route('/search', methods=['GET', 'POST'])
 def api_search():
-    if request.method == 'POST':
-        p = request.form['proc']
-        
-        return redirect(f'/api/find-all/{p}')
-    else:
+    try:
+        if request.method == 'POST':
+            p = request.form['proc']
+
+            return redirect(f'/api/find-all/{p}')
+        else:
+            return redirect('/error')
+    except:
         return redirect('/error')
 
 if __name__ == '__main__':

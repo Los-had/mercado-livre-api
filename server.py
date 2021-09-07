@@ -42,9 +42,14 @@ def find_all_products_data(product_name: str):
             product_link = product_card.find('a', class_='ui-search-item__group__element ui-search-link')
             price1 = product_card.find('span', class_='price-tag-fraction').text
             cents = product_card.find('span', class_='price-tag-cents')
-            cents2 = str(cents)
-            coin = product_card.find('span', class_='price-tag-symbol').text
-            price = f'{price1}.{cents2[30:32]}'
+
+            if cents:
+                cents2 = str(cents)
+                coin = product_card.find('span', class_='price-tag-symbol').text
+                price = f'{price1}.{cents2[30:32]}'
+            else:
+                price = price1
+
             product = {
                 "id": product_id,
                 "name": title,
@@ -101,6 +106,6 @@ def find_product_data(product_name: str):
         return default_error_message()
 
 if __name__ == "__main__":
-    print(find_all_products_data('caneta'))
-    print('\n\n\n\n')
-    print(find_product_data('caneta'))
+    print(find_all_products_data('tesoura'))
+    #print('\n\n\n\n')
+    #print(find_product_data('caneta'))
