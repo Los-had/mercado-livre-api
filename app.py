@@ -43,7 +43,7 @@ def api_search():
     except:
         return redirect('/error')
 
-@app.route('/api/save/<string:product>/<int:p_id>/<string:email>/<string:email_provider>', methods=['GET'])
+@app.route('/api/save/<string:product>/<int:p_id>/<string:email>/<string:email_provider>', methods=['GET', 'POST'])
 def save_product(product, p_id, email, email_provider):
     save_to_db(product, p_id, email, email_provider)
     return {

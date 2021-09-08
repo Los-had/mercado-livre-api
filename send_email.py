@@ -1,4 +1,4 @@
-#import smtp
+import smtplib
 from datetime import datetime
 import json
 import requests
@@ -55,4 +55,4 @@ def save_to_db(product_name: str, product_id: int, email: str, email_provider: s
 #print(actual_date)
 
 if __name__ == '__main__':
-    save_to_db('chocolate', 0, 'bernardesmiguel709', 'gmail')
+    print(save_to_db('chocolate', 0, 'bernardesmiguel709', 'gmail'))
