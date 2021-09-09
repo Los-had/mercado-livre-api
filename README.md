@@ -62,5 +62,16 @@ or this link [https://mercado-livre-api-loshad.herokuapp.com/api/find/{product}]
   ],
   "searched_day": "Tuesday, September 07, 2021 20:53:22"
 ```
+
+### /api/save/{product name}/{product id in the /api/find-all/ route}/{your email, example: test123}/{your email provider, example: gmail}
+***example: https://mercado-livre-api-loshad.herokuapp.com/api/save/chocolat/0/test123/gmail***
+#### returned json
+```
+{
+  "Message": "Saved on mercado-livre-api db"
+}
+``` 
+after that your product is going to saved on mercado-livre-api db, Which will send weekly emails with product information
+
 ## License
 [MIT](LICENSE)
