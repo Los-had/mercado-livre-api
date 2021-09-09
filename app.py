@@ -1,5 +1,6 @@
 from werkzeug.exceptions import RequestURITooLarge
 from server import find_all_products_data, find_product_data
+from db_manager import save_to_db
 from flask import Flask, url_for, request, redirect, render_template
 import os
 
@@ -41,6 +42,10 @@ def api_search():
             return redirect('/error')
     except:
         return redirect('/error')
+
+@app.route('/api/save/<string:product>/<int:p_id>/<string:email>/<string:email_provider>', methods=['GET', 'POST'])
+def save_product(product, p_id, email, email_provider):
+    return save_to_db(product, p_id, email, email_provider)
 
 if __name__ == '__main__':
     app.run(debug=True)
