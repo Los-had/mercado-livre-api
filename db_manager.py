@@ -1,15 +1,17 @@
-import smtplib
-from datetime import datetime
+from datetime import datetime, date
 import json
 import requests
 from requests import HTTPError, ConnectionError
 import sqlite3
 from sqlite3 import Error
 
-actual_date = datetime.now().strftime('%d/%m')
+actual_month = datetime.now().strftime('%m')
+actual_day = datetime.now().strftime('%d')
+actual_year = datetime.now().strftime('%Y')
+actual_date = date(int(actual_year), int(actual_month), int( actual_day))
 
 try:
-    conn = sqlite3.connect('users.db')
+    conn = sqlite3.connect('users.db', check_same_thread=False)
     cursor = conn.cursor()
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS users (
@@ -39,6 +41,10 @@ def save_to_db(product_name: str, product_id: int, email: str, email_provider: s
         VALUES ('{name}', {product_price}, '{product_link}', '{full_email}', '{actual_date}')
         ''')
         conn.commit()
+
+        return {
+            "Message": "Saved on mercado-livre-api db"
+        }
 
     except Error as e:
         return {
