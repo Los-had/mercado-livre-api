@@ -62,3 +62,5 @@ def save_to_db(product_name: str, product_id: int, email: str, email_provider: s
 
 if __name__ == '__main__':
     print(save_to_db('chocolate', 0, 'bernardesmiguel709', 'gmail'))
+    print(save_to_db('lápis', 0, 'bernardesmiguel709', 'gmail'))
+    print(save_to_db('caneta', 0, 'bernardesmiguel709', 'gmail'))

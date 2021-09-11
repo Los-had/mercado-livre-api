@@ -14,6 +14,19 @@ try:
 except Error as e:
     print(f'Error!(error: {e}) we could not connect to the database, try again.')
 
+def send_error_email(email, error):
+    email_to = 'RandomPersonAPI.comments@gmail.com'
+    email_for = email
+    smtp = 'smtp.gmail.com'
+    server = smtplib.SMTP(smtp, 587)
+    server.starttls()
+    server.login(email_to, password)
+    msg = f'''
+    We couldn't send the product email, because of an error(error: {error})
+    '''
+    server.sendmail(email_to, email_for, msg)
+    server.quit()
+
 def send_email(email, link, name):
     email_to = 'RandomPersonAPI.comments@gmail.com'
     email_for = email
@@ -37,14 +50,17 @@ while True:
         print(f'{row}\n\n\n')
         str_to_date = date = datetime.strptime(row[5], '%Y-%m-%d').date()
         if actual_date == str_to_date:
-            send_email(row[4], row[3], row[1])
-            new_date = str_to_date + timedelta(days = 7)
-            print(new_date)
-            c.execute("""
-            UPDATE users SET send_date = ?
-            WHERE id = ?
-            """, (new_date, row[0]))
-            conn.commit()
+            try:
+                send_email(row[4], row[3], row[1].encode('utf-8'))
+                new_date = str_to_date + timedelta(days = 7)
+                print(new_date)
+                c.execute("""
+                UPDATE users SET send_date = ?
+                WHERE id = ?
+                """, (new_date, row[0]))
+                conn.commit()
+            except UnicodeError as e:
+                send_error_email(row[4], e)
 
         print(f'\n\n\n{row}')
 
