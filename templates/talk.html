@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<form action="{{ url_for('talk') }}" method="POST">
+  <div class="mb-3">
+    <label for="op" class="form-label">Your name:</label>
+    <input type="text" class="form-control" id="op" name="op" placeholder="Anonymous">
+  </div>
+  <div class="mb-3">
+    <label for="title">Post title:</label>
+    <input type="text" name="title" id="title" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="txt" class="form-label">Comment</label>
+    <input type="text" class="form-control" id="txt" name="txt" placeholder="Your comment here">
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>
+<br><hr><br>
+<h2><strong><i>Posts:</i></strong></h2>
+{% for row in posts %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ row[4] }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ row[1] }}, at {{ row[3] }}</h6>
+      <p class="card-text">{{ row[2] }}</p>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock %}

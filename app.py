@@ -53,15 +53,17 @@ def talk():
     if request.method == 'POST':
         p_content = request.form['txt']
         author = request.form['op']
-        add_comment_to_db(author, p_content)
-        posts = get_all_posts()
-
-        return render_template(
-            'talk.html',
-            posts = posts
-        )
+        title = request.form['title']
+        add_comment_to_db(author, p_content, title)
     else:
-        return redirect('/error')
+        pass
+
+    posts = get_all_posts()
+
+    return render_template(
+        'talk.html',
+        posts = posts
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

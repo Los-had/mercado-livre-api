@@ -10,20 +10,20 @@ try:
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         post TEXT NOT NULL,
-        date TEXT NOT NULL
+        date TEXT NOT NULL,
+        title TEXT NOT NULL
     );
     ''')
 except Error as e:
     print(f'error: {e}')
 
-def add_comment_to_db(name, content):
+def add_comment_to_db(name, content, title):
     actual_date = datetime.now().strftime('%Y-%m-%d')
     c.execute('''
-    INSERT INTO talk (name, post, date)
-    VALUES (?, ?, ?)
-    ''', (name, content, actual_date))
+    INSERT INTO talk (name, post, date, title)
+    VALUES (?, ?, ?, ?)
+    ''', (name, content, actual_date, title))
     conn.commit()
-    conn.close()
 
 def get_all_posts():
     c.execute('''

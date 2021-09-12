@@ -116,3 +116,4 @@ dmypy.json
 #db & passwords
 users.db
 password.txt
+talk.db
