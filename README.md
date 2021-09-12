@@ -73,5 +73,8 @@ or this link [https://mercado-livre-api-loshad.herokuapp.com/api/find/{product}]
 ``` 
 after that your product is going to saved on mercado-livre-api db, Which will send weekly emails with product information
 
+#### Questions
+ask in [talk](https://mercado-livre-api-loshad.herokuapp.com/talk)
+
 ## License
 [MIT](LICENSE)
