@@ -3,6 +3,7 @@ from server import find_all_products_data, find_product_data
 from db_manager import save_to_db
 from flask import Flask, url_for, request, redirect, render_template
 import os
+from talk import add_comment_to_db, get_all_posts
 
 app = Flask(__name__)
 key = os.environ.get('KEY')
@@ -46,6 +47,21 @@ def api_search():
 @app.route('/api/save/<string:product>/<int:p_id>/<string:email>/<string:email_provider>', methods=['GET', 'POST'])
 def save_product(product, p_id, email, email_provider):
     return save_to_db(product, p_id, email, email_provider)
+
+@app.route('/talk', methods=['GET', 'POST'])
+def talk():
+    if request.method == 'POST':
+        p_content = request.form['txt']
+        author = request.form['op']
+        add_comment_to_db(author, p_content)
+        posts = get_all_posts()
+
+        return render_template(
+            'talk.html',
+            posts = posts
+        )
+    else:
+        return redirect('/error')
 
 if __name__ == '__main__':
     app.run(debug=True)
